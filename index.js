@@ -21,7 +21,6 @@ for (const file of commandFiles) {
 console.log(client.commands);
 
 const player = new Player(client);
-
 player.on('error', (queue, error) => {
   console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
@@ -42,13 +41,13 @@ player.on('botDisconnect', queue => {
   queue.metadata.send('❌ | I was manually disconnected from the voice channel, clearing queue!');
 });
 
-player.on('channelEmpty', queue => {
-  queue.metadata.send('❌ | Nobody is in the voice channel, leaving...');
-});
+//player.on('channelEmpty', queue => {
+//  queue.metadata.send('❌ | Nobody is in the voice channel, leaving...');
+//});
 
-player.on('queueEnd', queue => {
-  queue.metadata.send('✅ | Queue finished!');
-});
+//player.on('queueEnd', queue => {
+//  queue.metadata.send('✅ | Queue finished!');
+//});
 
 client.once('ready', async () => {
   console.log('Ready!');
@@ -102,5 +101,8 @@ client.on('interactionCreate', async interaction => {
     });
   }
 });
-
+if (!process.env.DISCORD_TOKEN) {
+  console.error("[ERROR]", "Token not found please visit: https://discord.com/developers/application to get token")
+  process.exit(0)
+}
 client.login(process.env.DISCORD_TOKEN);

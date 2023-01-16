@@ -45,12 +45,12 @@ module.exports = {
 
       const queue = await player.createQueue(interaction.guild, {
         ytdlOptions: {
-				quality: "highest",
-				filter: "audioonly",
-				highWaterMark: 1 << 30,
-				dlChunkSize: 0,
+        quality: [91,92,93,94,95],
+				highWaterMark: 1<<25,
+				liveBuffer : 4900,
 			},
         metadata: interaction.channel,
+        leaveOnEmpty: false,
       });
 
       try {
